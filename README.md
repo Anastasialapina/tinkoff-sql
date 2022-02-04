@@ -34,7 +34,7 @@ cargo_flg = 0 – пассажирский|
 |       | quantity           | Кол-во перевезенного груза или пассажиров (размерность совпадает с capacity)|
 
 
-## Были созданы таблицы и запросы 
+## Таблицы и запросы 
 [https://www.db-fiddle.com/f/7SxAkKcrJYhVxeqmUq7Vps/12](https://www.db-fiddle.com/f/7SxAkKcrJYhVxeqmUq7Vps/13)
 
 ## Создание таблиц (использована MySQL v5.7): 
