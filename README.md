@@ -34,13 +34,8 @@ cargo_flg = 0 – пассажирский|
 |       | quantity           | Кол-во перевезенного груза или пассажиров (размерность совпадает с capacity)|
 
 
-
-
-
 ## Были созданы таблицы и запросы 
-[https://www.db-fiddle.com/f/7SxAkKcrJYhVxeqmUq7Vps/12](https://www.db-fiddle.com/f/7SxAkKcrJYhVxeqmUq7Vps/12)
-
-
+[https://www.db-fiddle.com/f/7SxAkKcrJYhVxeqmUq7Vps/12](https://www.db-fiddle.com/f/7SxAkKcrJYhVxeqmUq7Vps/13)
 
 ## Создание таблиц (использована MySQL v5.7): 
 
@@ -123,8 +118,13 @@ VALUES (3, '2021-01-08', 1, 1, 2, 'Vnukovo', 70);
 
 ```sql
 select distinct second_pilot_id from Table3
-where flight_dt like "%%%%-08-%%" and destination="Sheremetyevo";
+where flight_dt like "2022-08-%%" and destination="Sheremetyevo";
 ```
+
+### Результат:
+![alt text](https://i.ibb.co/sjW64dM/1.png)
+
+Анализ: Данный запрос сработал корректно, так как необходимо найти записи о перелетах в августе этого (2022) года. Так как задание выполнено в феврале 2022 года, то записей о перелетах в августе 2022 года по логике быть не должно, поэтому данные не найдены. Но если не придерживаться правил логики и добавить данные о перелете в августе данного года, то в результате запроса мы получим корректные данные.
 
 ### Задача 2. Выведите пилотов старше 45 лет, которые совершили больше 30 полетов на грузовых самолетах.
 
@@ -135,6 +135,11 @@ join Table2 on Table3.plane_id = Table2.plane_id
 where Table1.age > 45 and cargo_flg = 1
 group by Table1.pilot_id) as subtable where amount > 30;
 ```
+
+### Результат:
+![alt text](https://i.ibb.co/PxnHwhq/2.png)
+
+Анализ: Запрос сработал верно, потому что в таблицах нет данных о пилотах, старше 45 лет,  которые совершили больше 30 полетов на грузовых самолетах, так как слишком мало данных в таблицах.
 
 ### Задача 3. Выведите ТОП 10 пилотов-капитанов (first_pilot_id), которые перевезли наибольшее число пассажиров в этом году.
 
@@ -147,6 +152,7 @@ group by Table3.first_pilot_id
 order by sum(Table2.capacity) desc 
 limit 10;
 ```
+### Результат:
+![alt text](https://i.ibb.co/d6BXy1r/3.png)
 
-
-
+Анализ: Данный запрос сработал корректно, выведен только 1 запрос, а не 10, так как найдена только 1 запись по подходящим условиям.
